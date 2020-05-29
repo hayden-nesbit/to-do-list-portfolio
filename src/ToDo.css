@@ -1,0 +1,17 @@
+#boardView {
+    min-height: 75vh;
+    max-height: 75vh;
+}
+
+#list {
+    min-height: 45vh;
+    max-height: 45vh;
+}
+
+#textInput {
+    min-width: 350px 
+}
+
+#clear {
+    margin-top: 10px;
+}
