@@ -8,6 +8,9 @@ import { Collapse, Form, Label, FormGroup, NavLink, CardBody, Card, Input } from
 
 function ToDoList() {
 
+    // const API_KEY = "https://to-do-app-278812.uc.r.appspot.com/api/"
+    const API_KEY = "http://127.0.0.1:8000/api/"
+
     const [view, setView] = useState(1)
     const [todo, setTodo] = useState("")
 
@@ -27,7 +30,7 @@ function ToDoList() {
             todo: todo,
             status_id: 1
         }
-        await axios.post("http://127.0.0.1:8000/api/addTodo", data)
+        await axios.post(API_KEY + "addTodo", data)
             .then(function (response) {
                 setListData(response.data.todos)
 
@@ -35,6 +38,8 @@ function ToDoList() {
             .catch(function (error) {
                 console.log(error);
             });
+        
+        setTodo("")
     }
 
     async function handleChange(item) {
@@ -46,7 +51,7 @@ function ToDoList() {
             checked: check,
         }
         console.log(data)
-        await axios.post("http://127.0.0.1:8000/api/checkTodo", data)
+        await axios.post(API_KEY + "checkTodo", data)
             .then(function (response) {
                 setListData(response.data.todos)
 
@@ -63,7 +68,7 @@ function ToDoList() {
             status_id: status
         }
 
-        await axios.post("http://127.0.0.1:8000/api/updateShelf", data)
+        await axios.post(API_KEY + "updateShelf", data)
             .then(function (response) {
                 console.log(response.data)
                 setListData(response.data.todos)
@@ -77,7 +82,7 @@ function ToDoList() {
 
     async function deleteTodo() {
 
-        await axios.post("http://127.0.0.1:8000/api/deleteTodo")
+        await axios.post(API_KEY + "deleteTodo")
             .then(function (response) {
                 setListData(response.data.todos)
 
@@ -163,7 +168,7 @@ function ToDoList() {
                                                 : view !== 4 ?
                                                     <form onSubmit={addTodo} className="form-inline mt-4 pl-3">
                                                         <div className="form-group">
-                                                            <input onChange={(e) => setTodo(e.target.value)} type="text" className="form-control" id="textInput" placeholder="What do you need to do today?" />
+                                                            <input onChange={(e) => setTodo(e.target.value)} value={todo} type="text" className="form-control" id="textInput" placeholder="What do you need to do today?" />
                                                         </div>
                                                         <button type="submit" className="btn btn-warning"><FontAwesomeIcon icon={faPlus} /></button>
                                                     </form>
